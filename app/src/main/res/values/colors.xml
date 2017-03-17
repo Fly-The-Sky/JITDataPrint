@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <color name="ntransparent">#a0000000</color>
+    <color name="notransparent">#6a000000</color>
+    <!-- 白色 -->
+    <color name="white">#ffffffff</color>
+    <color name="bg_white">#F5F5F5</color>
+    <!-- 黑色 -->
+    <color name="black">#ff000000</color>
+    <!-- 灰色 -->
+    <color name="gray">#ffaaaaaa</color>
+    <!-- 深灰色 -->
+    <color name="dark_gray">#3C3C3C</color>
+    <!-- 淡灰色 -->
+    <color name="light_gray">#FCFCFC</color>
+    <!-- 竖线淡灰色 -->
+    <color name="line_gray">#DBDBDB</color>
+    <!-- 红色 -->
+    <color name="red">#ffff0000</color>
+    <!-- 红橙色 -->
+    <color name="orangered">#FF4500</color>
+
+    <!-- 蓝色 -->
+    <color name="blue">#ff0000ff</color>
+    <!-- 淡蓝色 -->
+    <color name="title_blue">#66CCFF</color>
+
+    <!-- 橙色 -->
+    <color name="orange">#FFB90F</color>
+    <!-- 深橙色 -->
+    <color name="dark_orange">#FF7F24</color>
+    <!-- 黄色 -->
+    <color name="yellow">#FFFF00</color>
+    <!-- 橘橙色 -->
+    <color name="Tangor">#ff8100</color>
+    <!-- 背景橙色 -->
+    <color name="back_orange">#FFB90F</color>
+    <!-- 蛋黄 -->
+    <color name="yolk_yellow">#FFEC8B</color>
+
+
+    <!-- 粉红色 -->
+    <color name="pink">#FFC0CB</color>
+    <!-- 亮粉红色 -->
+    <color name="lightpink">#FFB6C1</color>
+
+    <!-- 绿色 -->
+    <color name="green">#ff00ff00</color>
+    <!-- 深绿色 -->
+    <color name="dark_green">#ff16b31a</color>
+    <!-- 苍宝石绿 -->
+    <color name="green1">#32CD32</color>
+    <!-- 深绿色2 -->
+    <color name="tint_normaluse_battery">#ff17a221</color>
+
+    <!-- 亮天蓝色 -->
+    <color name="lightskyblue">#87CEFA</color>
+    <!-- 天蓝色 -->
+    <color name="skyblue">#87CEEB</color>
+    <!-- 天蓝色 -->
+    <color name="Azure">#0080FF</color>
+    <!-- 道奇蓝 -->
+    <color name="dq_blue">#1E90FF</color>
+    <!-- 爱丽丝蓝 -->
+    <color name="als_blue">#F0F8FF</color>
+    <!-- 铁青 -->
+    <color name="iron_blueness">#4682B4</color>
+    <!-- 亮天蓝色 -->
+    <color name="light_skyblue">#87CEFA</color>
+    <!-- 深天蓝 -->
+    <color name="dark_skyblue">#00BFFF</color>
+    <!-- 亮蓝 -->
+    <color name="light_blue">#ADD8E6</color>
+    <!-- 火药青 -->
+    <color name="powderblue">#B0E0E6</color>
+    <!-- 军服蓝 -->
+    <color name="cadet_blue">#5F9EA0</color>
+    <!-- 淡青色 -->
+    <color name="nattierblue">#E0FFFF</color>
+    <!-- 弱绿宝石 -->
+    <color name="greenness">#AFEEEE</color>
+    <!-- 青色 -->
+    <color name="blueness">#00FFFF</color>
+    <!-- 米色 -->
+    <color name="beige">#F5F5DC</color>
+    <!-- 浅黄色 -->
+    <color name="wheat">#F5DEB3</color>
+    <!-- 淡紫色 -->
+    <color name="lavender">#DA70D6</color>
+    <!-- 中紫色 -->
+    <color name="mediumpurple">#9370DB</color>
+    <!-- 淡灰色 -->
+    <color name="gainsboro">#DCDCDC</color>
+    <!-- 亮灰色 -->
+    <color name="lightgrey">#D3D3D3</color>
+</resources>

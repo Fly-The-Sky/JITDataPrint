@@ -1,0 +1,54 @@
+<resources>
+    <!--dp-->
+    <dimen name="font_size_0dp">0dp</dimen>
+    <dimen name="font_size_0.1dp">0.1dp</dimen>
+    <dimen name="font_size_0.2dp">0.2dp</dimen>
+    <dimen name="font_size_0.3dp">0.3dp</dimen>
+    <dimen name="font_size_0.5dp">0.5dp</dimen>
+    <dimen name="font_size_1dp">1dp</dimen>
+    <dimen name="font_size_2dp">2dp</dimen>
+    <dimen name="font_size_3dp">3dp</dimen>
+    <dimen name="font_size_5dp">5dp</dimen>
+    <dimen name="font_size_10dp">10dp</dimen>
+    <dimen name="font_size_12dp">12dp</dimen>
+    <dimen name="font_size_14dp">14dp</dimen>
+    <dimen name="font_size_16dp">16dp</dimen>
+    <dimen name="font_size_18dp">18dp</dimen>
+    <dimen name="font_size_20dp">20dp</dimen>
+    <dimen name="font_size_22dp">22dp</dimen>
+    <dimen name="font_size_24dp">24dp</dimen>
+    <dimen name="font_size_26dp">26dp</dimen>
+    <dimen name="font_size_28dp">28dp</dimen>
+    <dimen name="font_size_30dp">30dp</dimen>
+    <dimen name="font_size_35dp">35dp</dimen>
+    <dimen name="font_size_40dp">40dp</dimen>
+    <dimen name="font_size_45dp">45dp</dimen>
+    <dimen name="font_size_50dp">50dp</dimen>
+    <dimen name="font_size_55dp">55dp</dimen>
+    <dimen name="font_size_60dp">60dp</dimen>
+    <dimen name="font_size_80dp">80dp</dimen>
+    <dimen name="font_size_100dp">100dp</dimen>
+    <dimen name="font_size_120dp">120dp</dimen>
+    <dimen name="font_size_160dp">160dp</dimen>
+    <dimen name="font_size_180dp">180dp</dimen>
+    <dimen name="font_size_200dp">200dp</dimen>
+
+    <!--sp-->
+    <dimen name="font_size_1sp">1sp</dimen>
+    <dimen name="font_size_2sp">2sp</dimen>
+    <dimen name="font_size_5sp">5sp</dimen>
+    <dimen name="font_size_10sp">10sp</dimen>
+    <dimen name="font_size_12sp">12sp</dimen>
+    <dimen name="font_size_14sp">14sp</dimen>
+    <dimen name="font_size_16sp">16sp</dimen>
+    <dimen name="font_size_18sp">18sp</dimen>
+    <dimen name="font_size_20sp">20sp</dimen>
+    <dimen name="font_size_22sp">22sp</dimen>
+    <dimen name="font_size_24sp">24sp</dimen>
+    <dimen name="font_size_26sp">26sp</dimen>
+    <dimen name="font_size_28sp">28sp</dimen>
+    <dimen name="font_size_30sp">30sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+</resources>

@@ -1,0 +1,101 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <!-- animation 样式 -->
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>
+
+    <!-- toolbar菜单样式 -->
+    <style name="AppThemeToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <!-- toolbar弹出菜单样式 -->
+    <style name="AppThemePopup" parent="ThemeOverlay.AppCompat.Light"/>
+    <!--设置菜单popup出现位置在toolbar的下方-->
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <!-- 是否覆盖锚点，默认为true，即盖住Toolbar -->
+        <item name="overlapAnchor">false</item>
+        <!--<item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>-->
+        <!--  弹出层背景颜色 -->
+        <!--<item name="android:popupBackground">@color/colorPrimary</item>-->
+        <!--  弹出层垂直方向上的偏移，即在竖直方向上距离Toolbar的距离，值为负则会盖住Toolbar  -->
+        <item name="android:dropDownVerticalOffset">5dp</item>
+        <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+    </style>
+    <!--TextView的样式-->
+    <style name="textThemeStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/font_size_18sp</item>
+        <item name="android:layout_margin">@dimen/font_size_5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/font_size_0dp</item>
+    </style>
+
+    <!--Button的样式-->
+    <style name="btnThemeStyle">
+        <item name="android:textColor">@color/black</item>
+        <!--<item name="android:background">@drawable/btn_press_selector</item>-->
+        <item name="android:padding">@dimen/font_size_0dp</item>
+    </style>
+    <!--EditText的样式-->
+    <style name="editThemeStyle">
+        <item name="android:textSize">@dimen/font_size_18sp</item>
+        <item name="android:paddingLeft">@dimen/font_size_10dp</item>
+        <item name="android:paddingRight">@dimen/font_size_10dp</item>
+        <item name="android:layout_width">@dimen/font_size_0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <!--EditText的样式-->
+    <style name="editThemeStyle1">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/font_size_18sp</item>
+        <item name="android:paddingLeft">@dimen/font_size_10dp</item>
+        <item name="android:paddingRight">@dimen/font_size_10dp</item>
+        <item name="android:layout_width">@dimen/font_size_0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:background">@null</item>
+    </style>
+    <!--选项条目样式-->
+    <style name="OptionItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <!--popupwindow滑入滑出效果-->
+    <style name="PopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <!--圆角Dialog-->
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+</resources>

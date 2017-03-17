@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/font_size_120dp"
+    android:background="@drawable/side_nav_bar"
+    android:orientation="horizontal"
+    android:padding="@dimen/font_size_10dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <com.dicot.jitprint.views.CircleImageView
+        android:id="@+id/hearder_user_info_img"
+        android:layout_width="@dimen/font_size_80dp"
+        android:layout_height="@dimen/font_size_80dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/font_size_10dp"
+        app:border_color="@color/cadet_blue"
+        app:border_width="2dp"
+        app:srcCompat="@mipmap/heard_photo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hearder_user_info_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/font_size_20dp"
+            android:text="@string/user_info_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="@dimen/font_size_20sp"/>
+
+        <TextView
+            android:id="@+id/hearder_user_info_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/font_size_10dp"
+            android:text="android.studio@android.com"/>
+    </LinearLayout>
+
+
+</LinearLayout>
