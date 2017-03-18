@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -17,11 +17,19 @@ import com.dd.CircularProgressButton;
 import com.dicot.jitprint.R;
 import com.dicot.jitprint.activity.main.MainActivity;
 import com.dicot.jitprint.base.BaseActivity;
+import com.dicot.jitprint.utils.AppConst;
 import com.dicot.jitprint.utils.DialogUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import java.util.HashMap;
+import java.util.Random;
+
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
 
 
 /**
@@ -38,18 +46,34 @@ public class LoginActivity extends BaseActivity {
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{"foo:hello", "bar:world"};
 
-    // UI references.
-    @ViewInject(value = R.id.username)
-    private AutoCompleteTextView mUserNameView;
-    @ViewInject(value = R.id.password)
+    @ViewInject(value = R.id.login_user_username)
+    private EditText mUserNameView;
+    @ViewInject(value = R.id.login_user_password)
     private EditText mPasswordView;
-    @ViewInject(value = R.id.email_sign_in_button)
+    @ViewInject(value = R.id.sign_in_button_submit)
     private CircularProgressButton mSignInButton;
-
+    @ViewInject(value = R.id.sign_in_button_register)
+    private Button mSmsButton;
+    // 短信注册，随机产生头像
+    private static final String[] AVATARS = {
+            "http://tupian.qqjay.com/u/2011/0729/e755c434c91fed9f6f73152731788cb3.jpg",
+            "http://99touxiang.com/public/upload/nvsheng/125/27-011820_433.jpg",
+            "http://img1.touxiang.cn/uploads/allimg/111029/2330264224-36.png",
+            "http://img1.2345.com/duoteimg/qqTxImg/2012/04/09/13339485237265.jpg",
+            "http://diy.qqjay.com/u/files/2012/0523/f466c38e1c6c99ee2d6cd7746207a97a.jpg",
+            "http://img1.touxiang.cn/uploads/20121224/24-054837_708.jpg",
+            "http://img1.touxiang.cn/uploads/20121212/12-060125_658.jpg",
+            "http://img1.touxiang.cn/uploads/20130608/08-054059_703.jpg",
+            "http://diy.qqjay.com/u2/2013/0422/fadc08459b1ef5fc1ea6b5b8d22e44b4.jpg",
+            "http://img1.2345.com/duoteimg/qqTxImg/2012/04/09/13339510584349.jpg",
+            "http://img1.touxiang.cn/uploads/20130515/15-080722_514.jpg",
+            "http://diy.qqjay.com/u2/2013/0401/4355c29b30d295b26da6f242a65bcaad.jpg"
+    };
 
     @Override
     public void init() {
         super.init();
+        SMSSDK.initSDK(this, AppConst.APPKEY, AppConst.APPSECRET);
         x.view().inject(this);
         setActionTitle("登录");
     }
@@ -90,8 +114,62 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
+        mSmsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerPageSms();
+            }
+        });
     }
 
+    private void registerPageSms() {
+        // 打开注册页面
+        RegisterPage registerPage = new RegisterPage();
+        registerPage.setRegisterCallback(new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                // 解析注册结果
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    @SuppressWarnings("unchecked")
+                    HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
+                    String country = (String) phoneMap.get("country");
+                    String phone = (String) phoneMap.get("phone");
+                    // 提交用户信息
+                    registerUser(country, phone);
+                }
+            }
+        });
+        registerPage.show(this);
+    }
+
+    // 提交用户信息
+    private void registerUser(String country, String phone) {
+        Random rnd = new Random();
+        int id = Math.abs(rnd.nextInt());
+        String uid = String.valueOf(id);
+        String nickName = "SmsSDK_User_" + uid;
+        String avatar = AVATARS[id % 12];
+        SMSSDK.submitUserInfo(uid, nickName, avatar, country, phone);
+    }
+
+    EventHandler eh = new EventHandler() {
+
+        @Override
+        public void afterEvent(int event, int result, Object data) {
+
+            if (result == SMSSDK.RESULT_COMPLETE) {
+                //回调完成
+                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                    //提交验证码成功
+                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                    //获取验证码成功
+                } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
+                    //返回支持发送验证码的国家列表
+                }
+            } else {
+                ((Throwable) data).printStackTrace();
+            }
+        }
+    };
 
     private void simulateSuccessProgress(final CircularProgressButton button) {
         ValueAnimator widthAnimation = ValueAnimator.ofInt(1, 100);

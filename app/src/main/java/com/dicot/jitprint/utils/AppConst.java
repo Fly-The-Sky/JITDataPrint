@@ -6,7 +6,6 @@ import android.os.Environment;
  * Created by Hunter
  * Describe 常量管理列表 方便统一管理
  * on 2017/3/11.
- *
  */
 public final class AppConst {
     public static final String TAG = "Dicot_JITPrint";
@@ -23,7 +22,11 @@ public final class AppConst {
     public final static String pathImages = SDCard + "/JITPrint/Images/";
     public final static String pathPhotos = SDCard + "/JITPrint/Photos/";
 
-    public final static String KEY = "155863651256367";
+    //填写从短信SDK应用后台注册得到APPKEY
+    public static String APPKEY = "1c2cf69efd461";
+
+    // 填写从短信SDK应用后台注册得到的APPSECRET
+    public static String APPSECRET = "4b25170c5daaa7e00724b1f96fc8cdb5";
 
     /**
      * 服务器地址

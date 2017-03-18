@@ -8,6 +8,7 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
+    <string name="prompt_phone">请输入手机号</string>
     <string name="prompt_username">请输入用户名</string>
     <string name="prompt_password">请输入密码</string>
     <string name="action_sign_in">登 录</string>
@@ -18,5 +19,6 @@
     <string name="error_field_required">用户名为必填项</string>
     <string name="user_info_name">周四发生萨芬</string>
     <string name="main_pictrue">图片</string>
+    <string name="login_register_userinfo">注 册</string>
 
 </resources>

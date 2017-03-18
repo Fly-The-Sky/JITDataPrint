@@ -18,12 +18,13 @@
         android:layout_marginTop="@dimen/font_size_100dp"
         android:orientation="vertical">
 
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <AutoCompleteTextView
-                android:id="@+id/username"
+                android:id="@+id/login_user_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/login_user_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -54,7 +55,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <com.dd.CircularProgressButton
-            android:id="@+id/email_sign_in_button"
+            android:id="@+id/sign_in_button_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -65,6 +66,16 @@
             app:cpb_textComplete="成 功"
             app:cpb_textError="失 败"
             app:cpb_textIdle="登 陆"/>/>
+
+        <Button
+            android:id="@+id/sign_in_button_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_press_selector"
+            android:padding="@dimen/font_size_0dp"
+            android:textSize="@dimen/font_size_20dp"
+            android:text="@string/login_register_userinfo"/>/>
 
     </LinearLayout>
 </LinearLayout>
