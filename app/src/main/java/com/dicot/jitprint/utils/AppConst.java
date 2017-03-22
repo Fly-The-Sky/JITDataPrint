@@ -42,6 +42,14 @@ public final class AppConst {
         public static final String GAME = "http://h.4399.com/android";
     }
 
+    //打印机信息
+    public static final class PrintPrefInfo {
+        public static final String PrintDefault = "dding_printer_default";
+        public static final String PrintInfo = "dding_printer_default";
+        public static final String PrintName = "PrinterDefaultName";//登录
+        public static final String PrintAddress = "PrinterDefaultAddress";//注册
+    }
+
     //用户
     public static final class User {
         private static final String USER = SERVER_ADDRESS + "/user";

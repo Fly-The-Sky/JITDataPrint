@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_toolbar_header"/>
+
+    <EditText
+        android:id="@+id/print_module_edt_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/font_size_0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/print_module_btn_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/font_size_50dp"
+        android:layout_margin="@dimen/font_size_10dp"
+        android:background="@drawable/btn_press_selector"
+        android:text="@string/print_string_pictrue"/>
+</LinearLayout>

@@ -41,7 +41,7 @@
     </style>
     <!--TextView的样式-->
     <style name="textThemeStyle">
-        <item name="android:textColor">@color/black</item>
+     <!--   <item name="android:textColor">@color/black</item>-->
         <item name="android:textSize">@dimen/font_size_18sp</item>
         <item name="android:layout_margin">@dimen/font_size_5dp</item>
         <item name="android:gravity">center_vertical</item>
@@ -50,7 +50,7 @@
 
     <!--Button的样式-->
     <style name="btnThemeStyle">
-        <item name="android:textColor">@color/black</item>
+       <!-- <item name="android:textColor">@color/black</item>-->
         <!--<item name="android:background">@drawable/btn_press_selector</item>-->
         <item name="android:padding">@dimen/font_size_0dp</item>
     </style>
@@ -98,4 +98,6 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
+
+
 </resources>

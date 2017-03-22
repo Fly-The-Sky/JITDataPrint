@@ -1,6 +1,7 @@
 package com.dicot.jitprint.activity.main;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +20,10 @@ import android.view.View;
 import com.dicot.jitprint.R;
 import com.dicot.jitprint.adapter.RecyclerAdapter;
 import com.dicot.jitprint.base.BaseActivity;
+import com.dicot.jitprint.print.DeviceList;
+import com.dicot.jitprint.utils.AppConst;
 import com.dicot.jitprint.utils.MyUtil;
+import com.dicot.jitprint.utils.PrefTool;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -27,6 +31,8 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import asp.lib.bt.BluetoothState;
 
 import static com.dicot.jitprint.R.id.fab;
 
@@ -126,27 +132,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 switch (position) {
                     case 0:
                         MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintModuleActivity.class);
+                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
                         startActivity(intent);
                         break;
                     case 1:
                         MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintModuleActivity.class);
+                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
                         startActivity(intent);
                         break;
                     case 2:
                         MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintModuleActivity.class);
+                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
                         startActivity(intent);
                         break;
                     case 3:
                         MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintModuleActivity.class);
+                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
                         startActivity(intent);
                         break;
                     case 4:
                         MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintModuleActivity.class);
+                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
                         startActivity(intent);
                         break;
                     case 5:
@@ -211,8 +217,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_slideshow://
 
                 break;
-            case R.id.nav_manage://
-
+            case R.id.nav_print_set://
+                Intent intent = new Intent(this, DeviceList.class);
+                startActivity(intent);
                 break;
             case R.id.nav_about://关于
 
@@ -222,9 +229,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             default:
                 break;
         }
-
-
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    Bundle b = data.getExtras(); // data为B中回传的Intent
+                    PrefTool prefTool = new PrefTool(this, AppConst.PrintPrefInfo.PrintDefault);
+                    prefTool.setStringSave(AppConst.PrintPrefInfo.PrintName, b.getString("PrinterName"));
+                    prefTool.setStringSave(AppConst.PrintPrefInfo.PrintAddress, b.getString("PrinterAddress"));
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+
 }

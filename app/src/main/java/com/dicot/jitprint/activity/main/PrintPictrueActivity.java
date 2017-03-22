@@ -4,24 +4,38 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dicot.jitprint.MyApp;
 import com.dicot.jitprint.R;
 import com.dicot.jitprint.base.BaseActivity;
+import com.dicot.jitprint.utils.AppConst;
+import com.dicot.jitprint.utils.MyUtil;
+import com.dicot.jitprint.utils.PhotoUtil;
+import com.dicot.jitprint.utils.PrefTool;
+import com.dicot.jitprint.utils.PressUtil;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
 
+import asp.lib.printer.DDPrinter;
+import asp.lib.printer.MyDialog;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
@@ -39,7 +53,15 @@ public class PrintPictrueActivity extends BaseActivity {
     private TextView mTxtPrintPictruePath;
     @ViewInject(value = R.id.print_pictrue_imageView)
     private ImageView mImgPrintPictrue;
+    //    @ViewInject(R.id.print_btn_pictrue)
+    //    private Button mBtnPrintPictrue;
     private ArrayList<String> mLstSelectPath;
+    private String mSelectPath;
+
+
+    private DDPrinter _printer;
+    private String _printerName;
+    private String _printerMac;
 
     @Override
     public void init() {
@@ -52,16 +74,46 @@ public class PrintPictrueActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
+        isExistPrint();
     }
 
-    @Override
-    public void initListener() {
-        super.initListener();
+    private void isExistPrint() {
+        try {
+            PrefTool prefTool = new PrefTool(this, AppConst.PrintPrefInfo.PrintDefault);
+            _printerName = prefTool.getStringPerf(AppConst.PrintPrefInfo.PrintName, "");
+            _printerMac = prefTool.getStringPerf(AppConst.PrintPrefInfo.PrintAddress, "");
+            Log.e("PrefTool", _printerName + "|" + _printerMac);
+            if (_printerMac.isEmpty()) {
+                MyUtil.showToast(this, "打印机不存在");
+                finish();
+            }
+            _printer = new DDPrinter(getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Event(value = {R.id.print_btn_pictrue}, type = View.OnClickListener.class)
+    private void onBtnClick(View view) {
+        switch (view.getId()) {
+            case R.id.print_btn_pictrue:
+                try {
+                    // 防止连续点击按钮
+                    if (PressUtil.isFastDoubleClick()) {
+                        return;
+                    }
+                    print_picture3();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_pictrue, menu);
         return true;
     }
@@ -85,7 +137,7 @@ public class PrintPictrueActivity extends BaseActivity {
                     getString(R.string.mis_permission_rationale),
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
         } else {
-
+            //d调用第三方获取多图片的方法
             MultiImageSelector selector = MultiImageSelector.create(PrintPictrueActivity.this);
             selector.showCamera(true);
             selector.single();
@@ -127,10 +179,38 @@ public class PrintPictrueActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
             mLstSelectPath = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-            String mSelectPath = mLstSelectPath.get(0);
+            mSelectPath = mLstSelectPath.get(0);
             mTxtPrintPictruePath.setText(mSelectPath);
             x.image().bind(mImgPrintPictrue, mSelectPath);
         }
     }
 
+    // 三寸图片打印
+    public void print_picture3() {
+        MyDialog.showProgress(this, "提示", "正在打印...");
+
+        try {
+            if (!_printer.open(_printerMac)) {
+                MyDialog.dismissProgress();
+                MyUtil.showToast(this, _printer.MessageError);
+                return;
+            }
+            _printer.set_head_active(0);//选择两寸还是三寸打印头
+            Bitmap bmpSrc = BitmapFactory.decodeFile(mSelectPath);
+            _printer.page_creat(72.0, 78.0, 1);
+            _printer.draw_box(1.0, 1.0, 71.0, 66.5, 2);
+            //        _printer.set_font_file(DDPrinter.FontName.FontCustom, "assets/fonts/mengmeng-en.ttf");
+            _printer.draw_bitmap(10.0, 5.0, PhotoUtil.zoomBitmap(bmpSrc, 400, 500), false);
+            //        _printer.draw_bitmap(20.0, 30.0, PhotoUtil.zoomBitmap(bmpSrc, 200, 200), true);
+            _printer.page_print(DDPrinter.MarkNone);
+            if (_printer.get_state(5000) == DDPrinter.PrinterState.Error) {
+                MyUtil.showToast(this, _printer.MessageError);
+            }
+            if (!_printer.close())
+                MyUtil.showToast(this, _printer.MessageError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        MyDialog.dismissProgress();
+    }
 }

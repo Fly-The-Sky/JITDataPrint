@@ -7,23 +7,14 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.dicot.jitprint.R;
-import com.dicot.jitprint.utils.MyUtil;
-import com.dicot.jitprint.views.CustomDialog;
 
 import org.xutils.view.annotation.ViewInject;
 
@@ -36,7 +27,6 @@ public class BaseActivity extends AppCompatActivity {
 
     @ViewInject(value = R.id.toolbar)
     private Toolbar mToolbar;
-    PopupWindow mPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

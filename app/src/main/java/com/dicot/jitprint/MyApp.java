@@ -11,11 +11,10 @@ import com.dicot.jitprint.utils.CrashHandler;
 
 import org.xutils.DbManager;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import cn.smssdk.SMSSDK;
+import asp.lib.printer.DDPrinter;
 
 /**
  * Created by Hunter
@@ -26,6 +25,8 @@ import cn.smssdk.SMSSDK;
 public class MyApp extends Application {
     private static DbManager.DaoConfig daoConfig;
 
+    //    public static DDPrinter mDDPrinter;
+
     public static DbManager.DaoConfig getDaoConfig() {
         return daoConfig;
     }
@@ -34,7 +35,6 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         CrashHandler.getInstance().init();
-
         //        initNoHttp();
         initDbManager();
     }

@@ -15,9 +15,9 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Slideshow"/>
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_print_set"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
+            android:title="@string/nav_print_set"/>
     </group>
 
     <item android:title="Communicate">
