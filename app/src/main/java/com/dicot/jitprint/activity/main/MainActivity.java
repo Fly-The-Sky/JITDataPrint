@@ -2,7 +2,6 @@ package com.dicot.jitprint.activity.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -34,8 +32,6 @@ import java.util.List;
 
 import asp.lib.bt.BluetoothState;
 
-import static com.dicot.jitprint.R.id.fab;
-
 
 /**
  * Created by Hunter
@@ -43,12 +39,12 @@ import static com.dicot.jitprint.R.id.fab;
  * on 2017/3/11.
  */
 @ContentView(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerAdapter.OnItemClickLitener {
 
     @ViewInject(value = R.id.toolbar)
     private Toolbar mToolbar;
-    @ViewInject(value = fab)
-    private FloatingActionButton mFloatingActionButton;
+    //    @ViewInject(value = fab)
+    //    private FloatingActionButton mFloatingActionButton;
     @ViewInject(value = R.id.drawer_layout)
     private DrawerLayout mDrawerLayout;
     @ViewInject(value = R.id.nav_view)
@@ -76,7 +72,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mLstData.add("微信打印");
         mLstData.add("QQ打印");
         mLstData.add("备忘录打印");
-        mLstData.add("相册打印");
+        mLstData.add("图片打印");
         try {
             //设置导航栏标题
             mToolbar.setTitle("主菜单");
@@ -114,57 +110,70 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void initListener() {
         super.initListener();
-        //设置界面浮动按钮
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //                            .setAction("Action", null).show();
-            }
-        });
+        //        //设置界面浮动按钮
+        //        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View view) {
+        //                //                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        //                //                            .setAction("Action", null).show();
+        //            }
+        //        });
         //滑动导航栏列表点击事件
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        mRecAdapter.setOnItemClickLitener(new RecyclerAdapter.OnItemClickLitener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent;
-                switch (position) {
-                    case 0:
-                        MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 1:
-                        MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 2:
-                        MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 3:
-                        MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 4:
-                        MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintTextActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 5:
-                        MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
-                        intent = new Intent(MainActivity.this, PrintPictrueActivity.class);
-                        startActivity(intent);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+        mRecAdapter.setOnItemClickLitener(this);
+    }
+
+    /**
+     * RecyclerView控件的条码点击事件方法
+     */
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent;
+        switch (position) {
+            case 0:
+                MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
+                intent = new Intent(MainActivity.this, PrintTextActivity.class);
+                //                intent.putExtra("typeText","TextPrint");
+                intent.putExtra("typeText", "便签");
+                startActivity(intent);
+                break;
+            case 1:
+                MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
+                intent = new Intent(MainActivity.this, PrintTextActivity.class);
+                //                intent.putExtra("typeText","MessagePrint");
+                intent.putExtra("typeText", "短信");
+                startActivity(intent);
+                break;
+            case 2:
+                MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
+                intent = new Intent(MainActivity.this, PrintTextActivity.class);
+                //                intent.putExtra("typeText","WechatPrint");
+                intent.putExtra("typeText", "微信");
+                startActivity(intent);
+                break;
+            case 3:
+                MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
+                intent = new Intent(MainActivity.this, PrintTextActivity.class);
+                //                intent.putExtra("typeText","QQPrint");
+                intent.putExtra("typeText", "QQ");
+                startActivity(intent);
+                break;
+            case 4:
+                MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
+                intent = new Intent(MainActivity.this, PrintTextActivity.class);
+                //                intent.putExtra("typeText","CheatPrint");
+                intent.putExtra("typeText", "微信");
+                startActivity(intent);
+                break;
+            case 5:
+                MyUtil.showToast(MainActivity.this, mLstData.get(position) + "");
+                intent = new Intent(MainActivity.this, PrintPictrueActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -180,23 +189,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /**
      * 抽屉导航的点击方法
      */
@@ -211,10 +203,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_camera://
                 // Handle the camera action
                 break;
-            case R.id.nav_gallery://
-
-                break;
-            case R.id.nav_slideshow://
+            case R.id.nav_downdata://
 
                 break;
             case R.id.nav_print_set://

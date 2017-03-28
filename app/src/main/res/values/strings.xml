@@ -4,7 +4,6 @@
     <string name="navigation_drawer_open">打开导航抽屉</string>
     <string name="navigation_drawer_close">关闭导航抽屉</string>
 
-    <string name="action_settings">Settings</string>
 
     <!-- Strings related to login -->
     <string name="prompt_phone">请输入手机号</string>
@@ -33,6 +32,12 @@
     <string name="DialogMsgButtonOK">是</string>
     <string name="DialogMsgButtonNO">否</string>
     <string name="MainClose">返回</string>
-    <string name="nav_print_set">打印机设置</string>
-    <string name="print_string_pictrue">打印</string>
+    <string name="print_string_pictrue">打 印</string>
+
+    <!--Menu set-->
+    <string name="nav_main_menu_downdata">资源下载</string>
+    <string name="nav_main_menu_printset">打印机设置</string>
+    <string name="nav_main_menu_check_updata">检查更新</string>
+    <string name="nav_main_menu_about">关于</string>
+    <string name="nav_main_menu_exit">退出程序</string>
 </resources>

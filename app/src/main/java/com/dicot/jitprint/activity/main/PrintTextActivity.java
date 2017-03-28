@@ -1,11 +1,11 @@
 package com.dicot.jitprint.activity.main;
 
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.dicot.jitprint.MyApp;
 import com.dicot.jitprint.R;
 import com.dicot.jitprint.base.BaseActivity;
 import com.dicot.jitprint.utils.AppConst;
@@ -35,19 +35,22 @@ public class PrintTextActivity extends BaseActivity {
     private DDPrinter _printer;
     private String _printerName;
     private String _printerAddress;
+    String mTypeMessage;
 
     @Override
     public void init() {
         super.init();
         x.view().inject(this);
-        setActionTitle("打印便签功能");
-        setBack();
     }
 
     @Override
     public void initData() {
         super.initData();
         isExistPrint();
+        Intent intent = getIntent();
+        mTypeMessage = intent.getStringExtra("typeText");
+        setActionTitle(mTypeMessage + "打印功能");
+        setBack();
     }
 
     private void isExistPrint() {
@@ -60,7 +63,7 @@ public class PrintTextActivity extends BaseActivity {
                 MyUtil.showToast(this, "打印机不存在");
                 finish();
             }
-            _printer = new DDPrinter(getApplicationContext());
+            _printer = new DDPrinter(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,37 +97,14 @@ public class PrintTextActivity extends BaseActivity {
                 MyUtil.showToast(this, _printer.MessageError);
                 return;
             }
+            int height = _printer.get_text_box_height(32, 16, 72, mEdtPrintText.getText().toString()) / 8;
             _printer.set_head_active(0);
-            _printer.page_creat(72.0, 60.0, 1);
-            _printer.draw_box(1.0, 1.0, 71.0, 96, 2);
-
-            //            _printer.set_font_style(DDPrinter.FontName.FontLocal_GBK24x24, DDPrinter.StyleBlodItalic);
-            //            _printer.draw_text(6.0, 5, 0, "打印文字", 0);
-            //            _printer.draw_text(10.0, 10, 1, "www.ddmic.com", 0);
-            //            _printer.draw_text(10.0, 15.0, 2, "丁丁", 0);
-            //
-            //            _printer.set_font_style(DDPrinter.FontName.FontLocal_GBK16x16, DDPrinter.StyleBlodItalic);
-            //            _printer.draw_text(10.0, 20.0, 1, "www.ddmic.com", 0);
-            //            _printer.draw_text(10.0, 25.0, 0, "丁丁", 0);
-            //
-            _printer.set_font_style(DDPrinter.FontName.FontDefault, DDPrinter.StyleBlodItalic);
-            _printer.draw_text(10.0, 30.0, 32, mEdtPrintText.getText().toString(), 0);
-            //
-            //            _printer.set_font_style(DDPrinter.FontName.FontCustom, DDPrinter.StyleBlodItalic);
-            //            _printer.draw_text(10.0, 45.0, 30, "www.ddmic.com", 0);
-            //            _printer.draw_text(10.0, 50.0, 30, "丁丁", 0);
-            //
-            //            _printer.set_font_style(DDPrinter.FontName.FontSerif, DDPrinter.StyleBlodItalic);
-            //            _printer.draw_text(10.0, 55.0, 32, "www.ddmic.com", 0);
-            //            _printer.draw_text(10.0, 60.0, 54, "丁丁", 0);
-            //
-            //            _printer.set_font_style(DDPrinter.FontName.FontSans, DDPrinter.StyleBlodItalic);
-            //            _printer.draw_text(10.0, 70.0, 28, "www.ddmic.com", 0);
-            //            _printer.draw_text(10.0, 75.0, 28, "丁丁", 0);
-            //
-            //            _printer.set_font_style(DDPrinter.FontName.FontMonospace, DDPrinter.StyleBlodItalic);
-            //            _printer.draw_text(10.0, 80.0, 32, "www.ddmic.com", 0);
-            //            _printer.draw_text(10.0, 85.0, 54, "丁丁", 0);
+            _printer.page_creat(72.0, 25.0 + height, 1);
+            _printer.set_font_style(DDPrinter.FontName.FontCustom, DDPrinter.StyleNormal);
+            _printer.draw_text(30.0, 5.0, 48, mTypeMessage, 0);
+            _printer.draw_line(0.0, 13.0, 72.0, 13.0, 1);
+            _printer.draw_text_box(5.0, 15.0, 32, 16, 60, mEdtPrintText.getText().toString());
+            _printer.draw_line(0.0, 17.0 + height, 72.0, 17.0 + height, 1);
 
             _printer.page_print(DDPrinter.MarkNone);
             if (_printer.get_state(5000) == DDPrinter.PrinterState.Error) {
@@ -137,6 +117,4 @@ public class PrintTextActivity extends BaseActivity {
         }
         MyDialog.dismissProgress();
     }
-
-
 }

@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="dding_sdk">
+  <library name="dding_sdk1.0.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/dding_sdk.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/dding_sdk1.0.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

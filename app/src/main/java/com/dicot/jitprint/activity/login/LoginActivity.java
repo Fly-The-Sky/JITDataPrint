@@ -3,15 +3,15 @@ package com.dicot.jitprint.activity.login;
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.dicot.jitprint.R;
@@ -40,10 +40,8 @@ import cn.smssdk.gui.RegisterPage;
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseActivity {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
+
+    ActivtyHandler mHandler;
     private static final String[] DUMMY_CREDENTIALS = new String[]{"foo:hello", "bar:world"};
 
     @ViewInject(value = R.id.login_user_username)
@@ -88,30 +86,21 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void initListener() {
         super.initListener();
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
+
         mSignInButton.setIndeterminateProgressMode(true);
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //                attemptLogin();
-                int post = mSignInButton.getProgress();
                 if (mSignInButton.getProgress() == 0) {
-                    //                    simulateSuccessProgress(mSignInButton);
                     mSignInButton.setProgress(50);
-                } else {
-                    mSignInButton.setProgress(0);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
                 }
+
+
+                mHandler = new ActivtyHandler();
+                Message message = Message.obtain();
+                message.what = 0x01;
+                mHandler.sendMessageDelayed(message, 2000);
+
             }
         });
         mSmsButton.setOnClickListener(new OnClickListener() {
@@ -171,19 +160,6 @@ public class LoginActivity extends BaseActivity {
         }
     };
 
-    private void simulateSuccessProgress(final CircularProgressButton button) {
-        ValueAnimator widthAnimation = ValueAnimator.ofInt(1, 100);
-        widthAnimation.setDuration(1500);
-        widthAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-        widthAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Integer value = (Integer) animation.getAnimatedValue();
-                button.setProgress(value);
-            }
-        });
-        widthAnimation.start();
-    }
 
     private void attemptLogin() {
         mUserNameView.setError(null);
@@ -213,6 +189,21 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    class ActivtyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            int what = msg.what;
+            switch (what) {
+                case 0x01:
+                    mSignInButton.setProgress(0);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     private boolean isPasswordValid(String password) {
         return password.length() > 4;

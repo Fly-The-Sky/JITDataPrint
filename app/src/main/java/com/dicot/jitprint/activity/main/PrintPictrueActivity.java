@@ -87,7 +87,7 @@ public class PrintPictrueActivity extends BaseActivity {
                 MyUtil.showToast(this, "打印机不存在");
                 finish();
             }
-            _printer = new DDPrinter(getApplicationContext());
+            _printer = new DDPrinter(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

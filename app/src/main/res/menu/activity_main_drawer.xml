@@ -1,40 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_print_set"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/nav_print_set"/>
-    </group>
+    <item
+        android:id="@+id/nav_camera"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="Import"/>
+    <item
+        android:id="@+id/nav_downdata"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="@string/nav_main_menu_downdata"/>
+    <item
+        android:id="@+id/nav_print_set"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="@string/nav_main_menu_printset"/>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_update"
-                android:icon="@drawable/ic_menu_update"
-                android:title="检查更新"/>
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_about"
-                android:title="关于"/>
-            <item
-                android:id="@+id/nav_exit"
-                android:icon="@drawable/ic_menu_exit"
-                android:title="退出程序"/>
-        </menu>
-    </item>
+    <item
+        android:id="@+id/nav_update"
+        android:icon="@drawable/ic_menu_update"
+        android:title="@string/nav_main_menu_check_updata"/>
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_menu_about"
+        android:title="@string/nav_main_menu_about"/>
+    <item
+        android:id="@+id/nav_exit"
+        android:icon="@drawable/ic_menu_exit"
+        android:title="@string/nav_main_menu_exit"/>
+
 
 </menu>
