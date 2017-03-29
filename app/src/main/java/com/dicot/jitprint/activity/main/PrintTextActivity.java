@@ -88,6 +88,12 @@ public class PrintTextActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        _printer.destroy();
+        super.onDestroy();
+    }
+
     // 三寸文字打印
     public void print_text3() {
         MyDialog.showProgress(this, "提示", "正在打印...");

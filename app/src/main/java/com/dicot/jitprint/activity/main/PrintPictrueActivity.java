@@ -185,6 +185,12 @@ public class PrintPictrueActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        _printer.destroy();
+        super.onDestroy();
+    }
+
     // 三寸图片打印
     public void print_picture3() {
         MyDialog.showProgress(this, "提示", "正在打印...");
@@ -195,13 +201,15 @@ public class PrintPictrueActivity extends BaseActivity {
                 MyUtil.showToast(this, _printer.MessageError);
                 return;
             }
+//            Bitmap bmpSrc = BitmapFactory.decodeResource(this.getResources(), R.drawable.cod1);
             _printer.set_head_active(0);//选择两寸还是三寸打印头
             Bitmap bmpSrc = BitmapFactory.decodeFile(mSelectPath);
-            _printer.page_creat(72.0, 78.0, 1);
-            _printer.draw_box(1.0, 1.0, 71.0, 66.5, 2);
-            //        _printer.set_font_file(DDPrinter.FontName.FontCustom, "assets/fonts/mengmeng-en.ttf");
-            _printer.draw_bitmap(10.0, 5.0, PhotoUtil.zoomBitmap(bmpSrc, 400, 500), false);
-            //        _printer.draw_bitmap(20.0, 30.0, PhotoUtil.zoomBitmap(bmpSrc, 200, 200), true);
+            _printer.page_creat(72.0, 70.0, 1);
+            _printer.draw_box(1.0, 1.0, 70.0, 60.0, 2);
+            _printer.draw_bitmap(15.0, 10.0, PhotoUtil.zoomBitmap(bmpSrc, 330, 330), false);
+
+//            _printer.draw_bitmap(12.0, 15.0, bmpSrc, false);
+//            _printer.draw_bitmap(12.0, 30.0, bmpSrc, true);
             _printer.page_print(DDPrinter.MarkNone);
             if (_printer.get_state(5000) == DDPrinter.PrinterState.Error) {
                 MyUtil.showToast(this, _printer.MessageError);

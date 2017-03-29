@@ -10,8 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/circular-progress-btn-library" />
-            <option value="$PROJECT_DIR$/multi-image-selector-library" />
             <option value="$PROJECT_DIR$/short-message-sdkgui" />
             <option value="$PROJECT_DIR$/sms-sdk" />
           </set>

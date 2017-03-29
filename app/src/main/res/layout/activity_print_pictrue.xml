@@ -29,5 +29,7 @@
         android:layout_height="@dimen/font_size_50dp"
         android:layout_margin="@dimen/font_size_10dp"
         android:background="@drawable/btn_press_selector"
-        android:text="@string/print_string_pictrue"/>
+        android:padding="@dimen/font_size_0dp"
+        android:text="@string/print_string_pictrue"
+        android:textSize="@dimen/font_size_20sp"/>
 </LinearLayout>
